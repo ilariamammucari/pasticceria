@@ -22,5 +22,7 @@
     <div>
         <h2>Dashboard di {{ Auth::user()->name }}</h2>
     </div>
+
+
 </div>
 @endsection

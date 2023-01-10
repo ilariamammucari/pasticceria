@@ -12,4 +12,10 @@ class Ingredient extends Model
     public function desserts(){
         return $this->belongsToMany(Dessert::class);
     }
+
+    public $fillable = [
+        'name',
+        'quantity',
+        'um'
+    ];
 }

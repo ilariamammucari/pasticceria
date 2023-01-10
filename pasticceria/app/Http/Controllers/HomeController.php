@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dessert;
+use App\Models\Ingredient;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -19,6 +21,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('guest.welcome');
+        $desserts = Dessert::all();
+
+        if( $desserts ){
+            $data = [
+                'desserts' => $desserts
+            ];
+        }
+        return view('guest.welcome')->with($data);
     }
 }
