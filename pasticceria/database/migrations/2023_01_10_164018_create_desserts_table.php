@@ -15,9 +15,11 @@ class CreateDessertsTable extends Migration
     {
         Schema::create('desserts', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id')->unsigned();
             $table->string('name');
             $table->float('price', 8,2);
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

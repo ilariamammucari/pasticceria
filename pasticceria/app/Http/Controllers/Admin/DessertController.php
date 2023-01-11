@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Dessert;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class DessertController extends Controller
 {
@@ -14,7 +17,11 @@ class DessertController extends Controller
      */
     public function index()
     {
-        //
+        $desserts = Dessert::all();
+        $data = [
+            'desserts' => $desserts
+        ];
+        return view('admin.home')->with($data);
     }
 
     /**
@@ -24,7 +31,7 @@ class DessertController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.create');
     }
 
     /**
@@ -33,9 +40,19 @@ class DessertController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Dessert $dessert)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required',
+            'price' => 'min:1|max:2048'
+            ]);
+            $dessert->user_id = Auth::id();
+            $dessert->name = $data['name'];
+            $dessert->price = $data['price'];
+            $dessert->fill($data);
+            $dessert->save();
+
+            return redirect()->route('admin.home');
     }
 
     /**
@@ -55,9 +72,15 @@ class DessertController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Dessert $dessert)
     {
-        //
+        if($dessert){
+            $data = [
+                'dessert' => $dessert,
+            ];
+            return view('admin.edit', $data);
+        }
+        abort('404');
     }
 
     /**
@@ -67,9 +90,23 @@ class DessertController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Dessert $dessert)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required',
+            'price' => 'min:1|max:2048'
+            ]);
+
+        if( $data['name'] != $dessert->name ){
+            $data['name'] = $data['name'];
+        }
+
+        if( $request->has('price') ) {
+            $data['price'] = $data['price'];
+        }
+
+        $dessert->update($data);
+        return redirect()->route('admin.home');
     }
 
     /**
@@ -78,8 +115,10 @@ class DessertController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Dessert $dessert)
     {
-        //
+        // $dessert->ingredients()->sync([]);
+        $dessert->delete();
+        return redirect()->route('admin.home');
     }
 }

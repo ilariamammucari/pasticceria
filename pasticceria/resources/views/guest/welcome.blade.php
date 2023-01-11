@@ -38,14 +38,29 @@
                 @endif
             </div>
 
-
-            <div class="d-flex" style="margin-top: 80px; cursor: pointer">
+            <div class="d-flex justify-content-around align-items-center flex-wrap" style="margin-top: 80px">
                 @foreach ($desserts as $dessert)
-                <div class="card ml-2" style="width: calc(100% / 2)">
-                    <div class="card-body">
-                        <div class="card-title text-center">
-                            {{ $dessert['name'] }}
-                        </div>
+                <div class="card mt-4" style="height: 300px">
+                    <img class="card-img-top" src="{{ asset('img/index.jpg') }}"" alt="Card image cap">
+                    <div class="card-body text-center d-flex flex-column justify-content-around">
+                        <h5 class="card-title">
+                            {{ $dessert->name }}
+                        </h5>
+                        <p class="card-text">
+                            @if (isset($sconto[$dessert->id]))
+                                @if ($sconto[$dessert->id] == 80)
+                                <div>
+                                    {{ $dessert->price * 80 / 100 }} euro
+                                </div>
+                                    <small style="color: red">prezzo all'80%</small>
+                                @elseif ($sconto[$dessert->id] == 20)
+                                    <div>{{ $dessert->price * 20 / 100 }} euro</div>
+                                    <small style="color: red">prezzo originale al 20%</small>
+                                @endif
+                            @else
+                                {{ $dessert->price }} euro
+                            @endif
+                        </p>
                     </div>
                 </div>
                 @endforeach

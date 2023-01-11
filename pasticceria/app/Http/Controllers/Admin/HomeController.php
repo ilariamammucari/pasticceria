@@ -11,6 +11,11 @@ class HomeController extends Controller
 {
     public function index()
     {   
-        return view('admin.home');
+        $desserts = Dessert::all();
+        $data = [
+            'desserts' => $desserts
+        ];
+
+        return view('admin.home')->with($data);
     }
 }
