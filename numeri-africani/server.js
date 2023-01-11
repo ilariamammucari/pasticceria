@@ -1,8 +1,17 @@
 const express = require('express');
+const sqlite3 = require('sqlite3').verbose();
 let app = express();
+const path = require('path');
+
+const db = new sqlite3.Database('dbFile/numeri.db');
+
+app.use(express.json());
+app.get('/', function(req, res) {
+    res.sendFile(path.join('/Users/ilariamammucari/Documents/mamp_public/test/numeri-africani/index.html'));
+});
 
 app.get('/all-numbers', (req,res) => {
-    db.all("SELECT * FROM numbers", (err,row) => {
+    db.all("SELECT * FROM numeri_africani", (err,row) => {
         if (err) {
             console.log(err.message);
             res.send({
@@ -10,10 +19,7 @@ app.get('/all-numbers', (req,res) => {
                 data: err.message
             })
         }else {
-            res.send({
-                code: "OK",
-                data: row
-            })
+            res.send(row)
         }
     })
 });

@@ -1,5 +1,4 @@
 const sqlite3 = require('sqlite3').verbose();
-const { open } = require('sqlite');
 const db_json = require('./db.json');
 
 const db = new sqlite3.Database('dbFile/numeri.db');
