@@ -44,7 +44,7 @@ class DessertController extends Controller
     {
         $data = $request->validate([
             'name' => 'required',
-            'price' => 'min:1|max:2048'
+            'price' => 'required|digits_between:1,99999999999999'
             ]);
             $dessert->user_id = Auth::id();
             $dessert->name = $data['name'];
@@ -94,7 +94,7 @@ class DessertController extends Controller
     {
         $data = $request->validate([
             'name' => 'required',
-            'price' => 'min:1|max:2048'
+            'price' => 'required|digits_between:1,99999999999999'
             ]);
 
         if( $data['name'] != $dessert->name ){
