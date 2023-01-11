@@ -20,10 +20,12 @@
         "postcss": "^8.1.14",
         "resolve-url-loader": "^5.0.0",
         "sass": "^1.57.1",
-        "sass-loader": "^10.4.1"
+        "sass-loader": "^10.4.1",
+        "vue-loader": "^16.8.3"
     },
     "dependencies": {
         "autoprefixer": "10.4.5",
-        "bootstrap": "^5.2.3"
+        "bootstrap": "^5.2.3",
+        "vue": "^3.2.45"
     }
 }
