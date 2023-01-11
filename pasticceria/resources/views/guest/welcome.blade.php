@@ -77,7 +77,7 @@
 
             <main class="d-flex justify-content-around align-items-center flex-wrap" style="margin-top: 100px">
                 @foreach ($desserts as $dessert)
-                <div class="card mt-4" style="height: 300px">
+                <div class="card mt-4" style="height: 300px; cursor: pointer" title="Ingredienti: uova, latte, farina, burro. Allergeni: glutine, frutta a guscio, lattosio">
                     <img class="card-img-top" src="{{ asset('img/index.jpg') }}"" alt="Card image cap">
                     <div class="card-body text-center d-flex flex-column justify-content-around">
                         <h5 class="card-title">
