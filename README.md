@@ -7,7 +7,7 @@ Ho utilizzato una libreria di Node.js (sqlite3) per costruire il database in sql
 
 Mi sono costruita un web service sempre in Node.js e creata un endpoint per reperire i dati dal database e uno per visualizzare il file html opportuno con express.
 
-Una volta ricevuti i dati ho realizzato una piccola interfaccia grafica che si divide in due sezioni: la prima sulla sinistra che va a manipolare i dati (pulendo dove possibile i caratteri non idonei) e verificare i numeri di telefono africani presenti nel database, restituendo in output la lista dei numeri che rispettano il fromat (sono composti da 11 numeri, non hanno lettere all'interno); mentre nella sezione di destra ho creato uno strumento di verifica dei numeri africani da input, che rispetta lo stesso format.
+Una volta ricevuti i dati ho realizzato una piccola interfaccia grafica che si divide in due sezioni: la prima sulla sinistra che va a manipolare i dati (pulendo dove possibile i caratteri non idonei) e verificare i numeri di telefono africani presenti nel database, restituendo in output la lista dei numeri che rispettano il fromat (sono composti da 11 numeri, non hanno lettere all'interno) e quelli che non lo rispettano; mentre nella sezione di destra ho creato uno strumento di verifica dei numeri africani da input, che rispetta lo stesso format.
 
 
 Esercitazione 2 - Pasticceria:

@@ -11,13 +11,16 @@
     <div class="container">
         <h1 class="text-center">Verifica il tuo numero africano</h1>
 
-        <div class="d-flex">
+        <div class="d-flex justify-content-between">
             <div style="width: calc(100% / 2);">
                 <p>Per verificare i numeri di telefono presenti nel database costruito in sqlite ed ottenere la lista dei numeri corretti premi il bottone verde!</p>
                 <button type="button" onclick="allNumbers()" class="btn btn-success">VERIFICA</button>
-                <p class="mt-3" id="data"></p>
+                <div class="d-flex">
+                    <p class="mt-3" id="data"></p>
+                    <p class="mt-3" id="uncorrect-data" style="margin-left: 50px;"></p>
+                </div>
             </div>
-            <div>
+            <div style="width: calc(100% / 3);">
                 <p>Per verificare un numero di telefono non presente nel database inseriscilo nello spazio opportuno e clicca il bottone celeste!</p>
                 <input style="display: block;" type="tel" id="number" id="number" >
                 <small style="display: block;" id="text">Inserisci il numero che vuoi verificare</small>
@@ -35,12 +38,15 @@
 
         const data = await response.json();
         document.getElementById("data").innerHTML = "<span style='color:green'>ELENCO NUMERI ACCETTATI:</span>" + "</br>";
+        document.getElementById("uncorrect-data").innerHTML = "<span style='color:red'>ELENCO NUMERI NON ACCETTATI:</span>" + "</br>";
         data.forEach((element) => {
             if (element.sms_phone.indexOf("_DELETED_") != -1) {
                 element.sms_phone = element.sms_phone.replace("_DELETED_", "");
             }
             if ( element.sms_phone.length == 11 && !isNaN(element.sms_phone) ) {
                 document.getElementById("data").innerHTML += element.sms_phone + "</br>";
+            }else{
+                document.getElementById("uncorrect-data").innerHTML += element.sms_phone + "</br>";
             }
         });
     }
@@ -52,10 +58,7 @@
     const regex = /^\d{11}$/gm;
 
     check.addEventListener("click", () => {
-        if (number.value == "") {
-            text.innerText = "Inserisci il numero che vuoi verificare";
-            text.style.color = "rgba(0,0,0,0)";
-        }else if(number.value.match(regex)){
+        if(number.value.match(regex)){
             text.innerText = "Il tuo numero é valido!!";
             text.style.color = "rgba(4,125,9,11)";
         }else{
