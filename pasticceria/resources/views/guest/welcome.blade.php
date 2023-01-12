@@ -77,29 +77,47 @@
 
             <main class="d-flex justify-content-around align-items-center flex-wrap" style="margin-top: 100px">
                 @foreach ($desserts as $dessert)
-                <div class="card mt-4" style="height: 300px; cursor: pointer" title="Ingredienti: uova, latte, farina, burro. Allergeni: glutine, frutta a guscio, lattosio">
-                    <img class="card-img-top" src="{{ asset('img/index.jpg') }}"" alt="Card image cap">
-                    <div class="card-body text-center d-flex flex-column justify-content-around">
-                        <h5 class="card-title">
-                            {{ $dessert->name }}
-                        </h5>
-                        <p class="card-text">
-                            @if (isset($sconto[$dessert->id]))
-                                @if ($sconto[$dessert->id] == 80)
-                                <div>
-                                    {{ $dessert->price * 80 / 100 }} euro
+                @if (isset($sconto[$dessert->id]) && $sconto[$dessert->id] == 100)
+                    <div style="opacity: 0.4">
+                        <div class="card mt-4" style="height: 300px; cursor: pointer" title="Ingredienti: uova, latte, farina, burro. Allergeni: glutine, frutta a guscio, lattosio">
+                            <img class="card-img-top" src="{{ asset('img/index.jpg') }}"" alt="Card image cap">
+                            <div class="card-body text-center d-flex flex-column justify-content-around">
+                                <h5 class="card-title">
+                                    {{ $dessert->name }}
+                                </h5>
+                                <div class="card-text">
+                                    {{ $dessert->price }} euro
                                 </div>
-                                    <small style="color: red">prezzo all'80%</small>
-                                @elseif ($sconto[$dessert->id] == 20)
-                                    <div>{{ $dessert->price * 20 / 100 }} euro</div>
-                                    <small style="color: red">prezzo originale al 20%</small>
-                                @endif
-                            @else
-                                {{ $dessert->price }} euro
-                            @endif
-                        </p>
+                                <small>Prodotto non disponibile</small>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                @else
+                    <div class="card mt-4" style="height: 300px; cursor: pointer" title="Ingredienti: uova, latte, farina, burro. Allergeni: glutine, frutta a guscio, lattosio">
+                        <img class="card-img-top" src="{{ asset('img/index.jpg') }}"" alt="Card image cap">
+                        <div class="card-body text-center d-flex flex-column justify-content-around">
+                            <h5 class="card-title">
+                                {{ $dessert->name }}
+                            </h5>
+                            <p class="card-text">
+                                @if (isset($sconto[$dessert->id]))
+                                    @if ($sconto[$dessert->id] == 80)
+                                    <div>
+                                        {{ $dessert->price * 80 / 100 }} euro
+                                    </div>
+                                        <small style="color: red">costa l'80%</small>
+                                    @elseif ($sconto[$dessert->id] == 20)
+                                        <div>{{ $dessert->price * 20 / 100 }} euro</div>
+                                        <small style="color: red">costa il 20%</small>
+                                    @endif
+                                @else
+                                    {{ $dessert->price }} euro
+                                @endif
+                            </p>
+                        </div>
+                    </div>
+                @endif
+                
                 @endforeach
             </main>
 

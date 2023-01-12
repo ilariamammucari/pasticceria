@@ -31,7 +31,7 @@ class HomeController extends Controller
             $mesi = floor(($diff - $anni * 365*60*60*24) / (30*60*60*24));
             $giorni = floor(($diff - $anni * 365*60*60*24 - $mesi*30*60*60*24)/ (60*60*24));
 
-            if ( $giorni != 0 && $giorni == 2 ) {
+            if ( $giorni != 0 && $giorni >= 2 && $giorni <= 2.9 ) {
                 $sconto[$dessert->id] = 80;
             }elseif ( $giorni != 0 && $giorni == 3 ) {
                 $sconto[$dessert->id] = 20;
